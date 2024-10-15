@@ -1,0 +1,29 @@
+@model IEnumerable<LawnMowingService.Models.Booking>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the shared layout
+}
+
+<h2 class="text-center mb-4">Operator Dashboard</h2>
+
+<table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead>
+        <tr class="bg-green-500 text-white">
+            <th class="py-2 px-4">Customer</th>
+            <th class="py-2 px-4">Machine</th>
+            <th class="py-2 px-4">Date</th>
+            <th class="py-2 px-4">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr class="hover:bg-gray-100">
+                <td class="py-2 px-4">@booking.Customer.Name</td>
+                <td class="py-2 px-4">@booking.Machine.Name</td>
+                <td class="py-2 px-4">@booking.Date.ToShortDateString()</td>
+                <td class="py-2 px-4">@booking.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

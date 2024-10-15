@@ -1,0 +1,29 @@
+@model IEnumerable<LawnMowingService.Models.Booking>
+
+<h2>Manage Conflicts</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Machine</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.Customer.Name</td>
+                <td>@booking.Machine.Name</td>
+                <td>@booking.Date.ToShortDateString()</td>
+                <td>@booking.Status</td>
+                <td>
+                    <a asp-action="AcknowledgeBooking" asp-route-id="@booking.Id">Acknowledge</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

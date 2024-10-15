@@ -1,0 +1,10 @@
+@model LawnMowingService.Models.Booking
+
+<h2 class="text-center mb-4">Booking Confirmation</h2>
+<p class="text-center">Your booking has been confirmed!</p>
+<p class="text-center">
+    Assigned Operator: @(Model.Operator != null ? Model.Operator.Name : "Not Assigned")
+</p>
+<p class="text-center">
+    Machine: @(Model.Machine != null ? Model.Machine.Name : "Not Assigned")
+</p>

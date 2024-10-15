@@ -1,0 +1,65 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use the shared layout
+}
+
+@model LawnMowingService.Models.Booking
+
+<h2 class="text-center text-2xl font-bold mb-6 text-gray-700">Create Booking</h2>
+
+<form asp-action="Create" method="post" class="shadow-lg p-6 bg-white rounded-lg max-w-lg mx-auto">
+    <!-- Customer ID -->
+    <div class="mb-4">
+        <label for="CustomerId" class="block text-gray-600 font-semibold mb-2">Customer ID</label>
+        <input type="text" name="CustomerId" value="@ViewBag.CustomerId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your customer ID" required readonly/>
+    </div>
+
+    <!-- Machine Selection with Image -->
+    <div class="mb-4">
+        <label for="MachineId" class="block text-gray-600 font-semibold mb-2">Select Machine</label>
+        <select name="MachineId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+            <option value="">Select a machine</option>
+            @if (ViewBag.Machines != null)
+            {
+                foreach (var machine in ViewBag.Machines)
+                {
+                    <option value="@machine.Id">@machine.Name</option>
+                }
+            }
+            else
+            {
+                <option value="">No machines available</option>
+            }
+        </select>
+    </div>
+
+    <!-- Booking Date -->
+    <div class="mb-4">
+        <label for="Date" class="block text-gray-600 font-semibold mb-2">Booking Date</label>
+        <input type="date" name="Date" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" required />
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition duration-300">Book</button>
+</form>
+
+@if (ViewData["AlternativeMachineMessage"] != null)
+{
+    <div class="mt-4 bg-yellow-100 text-yellow-700 p-4 rounded-lg text-center">
+        @ViewData["AlternativeMachineMessage"]
+    </div>
+}
+<script>
+    function updateMachineImage() {
+        const select = document.getElementById('machineSelect');
+        const image = document.getElementById('machineImage');
+        const selectedOption = select.options[select.selectedIndex];
+        const imageUrl = selectedOption.getAttribute('data-image-url');
+        
+        if (imageUrl) {
+            image.src = imageUrl;
+            image.style.display = 'block';
+        } else {
+            image.style.display = 'none';
+        }
+    }
+</script>

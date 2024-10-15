@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Welcome - Lawn Mowing Service";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center min-h-screen">
+
+    <!-- Card Container -->
+    <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-md text-center transform transition-all duration-300 hover:scale-105">
+        <div class="flex flex-col items-center justify-center h-full">
+            <!-- Heading Section -->
+            <h1 class="text-5xl font-extrabold mb-4 text-gray-800">Welcome</h1>
+            <p class="mb-6 text-gray-600 text-lg">Your journey to a beautiful lawn starts here.</p>
+
+            <!-- Image Section -->
+            <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
+                <img src="/images/lawn.jpeg" alt="Beautiful Lawn" class="object-cover w-full h-full transition-transform duration-500 hover:scale-110" />
+            </div>
+
+            <!-- Call to Action Buttons -->
+            <div class="mt-6">
+                <a href="/Account/Login" class="inline-block w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-md text-lg font-semibold hover:opacity-90 transition-opacity">Login</a>
+                <p class="text-sm mt-4 text-gray-600">
+                    Don't have an account? <a href="/Account/Register" class="text-blue-500 hover:underline transition-colors duration-300">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

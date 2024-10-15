@@ -1,0 +1,38 @@
+@model LawnMowingService.Models.LoginViewModel 
+
+@{
+    ViewData["Title"] = "Login - Lawn Mowing Service";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-6">Login</h1>
+        <form asp-action="Login" asp-controller="Customer" method="post" class="space-y-6">
+            @Html.AntiForgeryToken()
+            <div class="space-y-2">
+                <label asp-for="Email" for="email">Email</label>
+                <input asp-for="Email" id="email" name="Email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="space-y-2">
+                <label asp-for="Password" for="password">Password</label>
+                <input asp-for="Password" type="password" id="password" name="Password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <input asp-for="RememberMe" name="RememberMe" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                <label asp-for="RememberMe" class="block text-sm text-gray-900">Remember Me</label>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-md text-lg font-semibold hover:opacity-90 transition-opacity">Login</button>
+        </form>
+    </div>
+</body>
+</html>
