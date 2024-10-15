@@ -28,6 +28,7 @@ namespace LawnMowingService.Services
             {
                 var services = scope.ServiceProvider;
                 await InitializeDatabase(services);
+                await SeedOperators(services); // Call the new method here
             }
         }
 
@@ -38,6 +39,7 @@ namespace LawnMowingService.Services
             await CreateRoles(services);
             await CreateDefaultUsers(services);
             await SeedMachines(services);
+            await SeedOperators(services);
         }
 
         private async Task CreateRoles(IServiceProvider serviceProvider)
@@ -119,6 +121,27 @@ namespace LawnMowingService.Services
             else
             {
                 Console.WriteLine("Machines already exist in the database.");
+            }
+        }
+
+        private async Task SeedOperators(IServiceProvider serviceProvider)
+        {
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+            if (!context.Operators.Any())
+            {
+                var operators = new List<Operator>
+                {
+                    new Operator { Name = "Operator One", MachineId = 1, Status = "Pending" },
+                    new Operator { Name = "Operator Two", MachineId = 2, Status = "Pending" }
+                };
+                await context.Operators.AddRangeAsync(operators);
+                await context.SaveChangesAsync();
+                Console.WriteLine("Operators seeded successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Operators already exist in the database.");
             }
         }
 

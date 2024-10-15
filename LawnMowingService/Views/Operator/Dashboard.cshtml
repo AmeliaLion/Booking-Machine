@@ -13,6 +13,7 @@
             <th class="py-2 px-4">Machine</th>
             <th class="py-2 px-4">Date</th>
             <th class="py-2 px-4">Status</th>
+            <th class="py-2 px-4">Action</th> <!-- New column for actions -->
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,15 @@
                 <td class="py-2 px-4">@booking.Machine.Name</td>
                 <td class="py-2 px-4">@booking.Date.ToShortDateString()</td>
                 <td class="py-2 px-4">@booking.Status</td>
+                <td class="py-2 px-4">
+                    @if (booking.Status == "Assigned")
+                    {
+                        <form method="post" asp-action="CompleteBooking" asp-controller="Operator">
+                            <input type="hidden" name="bookingId" value="@booking.Id" />
+                            <button type="submit" class="bg-blue-500 text-white px-2 py-1 rounded">Mark as Done</button>
+                        </form>
+                    }
+                </td>
             </tr>
         }
     </tbody>

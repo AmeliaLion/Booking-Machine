@@ -48,7 +48,7 @@ namespace LawnMowingService.Controllers
             if (booking != null)
             {
                 booking.OperatorId = operatorId;
-                booking.Status = "Assigned";
+                booking.Status = "Assigned"; // Change status to Assigned
                 await _context.SaveChangesAsync();
             }
 

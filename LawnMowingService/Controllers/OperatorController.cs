@@ -46,5 +46,18 @@ namespace LawnMowingService.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CompleteBooking(int bookingId)
+        {
+            var booking = await _context.Bookings.FindAsync(bookingId);
+            if (booking != null && booking.OperatorId == GetCurrentOperatorId()) // Ensure the operator is authorized
+            {
+                booking.Status = "Done"; // Change status to Done
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Dashboard"); // Redirect to the operator's dashboard
+        }
     }
 }
