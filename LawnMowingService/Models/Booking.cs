@@ -11,9 +11,9 @@ namespace LawnMowingService.Models
         public DateTime Date { get; set; }
         public string Status { get; set; } = "Pending";
 
-        public virtual Customer Customer { get; set; } = new Customer();
-        public virtual Machine Machine { get; set; } = new Machine();
-        public virtual Operator Operator { get; set; } = new Operator();
+        public Customer? Customer { get; set; }
+        public Machine? Machine { get; set; }
+        public Operator? Operator { get; set; }
 
         // Optionally, if you need to have a distinct property for the assigned operator ID
         // public int? AssignedOperatorId => OperatorId; // If you want to have a separate property

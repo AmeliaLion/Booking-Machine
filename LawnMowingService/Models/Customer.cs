@@ -8,7 +8,7 @@ namespace LawnMowingService.Models // Ensure this matches your project structure
     {
         public new string Id { get; set; } = Guid.NewGuid().ToString(); // Use 'new' to hide the inherited member
         public string Name { get; set; } = string.Empty; // Initialize to avoid warnings
-        public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>(); // Initialize to avoid warnings
+        public ICollection<Booking> Bookings { get; set; } // Initialize to avoid warnings
         // Add any additional properties you want for the user
     }
 }

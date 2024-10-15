@@ -245,7 +245,7 @@ namespace LawnMowingService.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CustomerId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    CustomerId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MachineId = table.Column<int>(type: "int", nullable: false),
                     OperatorId = table.Column<int>(type: "int", nullable: true),

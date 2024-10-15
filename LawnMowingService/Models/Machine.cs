@@ -8,11 +8,6 @@ namespace LawnMowingService.Models
         public string Name { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;
-        public List<Booking>? Bookings { get; set; } // Make it nullable
-        // or initialize it
-        public Machine()
-        {
-            Bookings = new List<Booking>();
-        }
+        public List<Booking>? Bookings { get; set; } 
     }
 }

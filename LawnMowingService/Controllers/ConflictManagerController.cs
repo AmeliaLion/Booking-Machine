@@ -4,30 +4,41 @@ using LawnMowingService.Models; // Update this with the actual namespace of your
 using LawnMowingService.Data; // Ensure this matches your project structure
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace LawnMowingService.Controllers
 {
     public class ConflictManagerController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Customer> _userManager;
 
-        public ConflictManagerController(ApplicationDbContext context)
+        public ConflictManagerController(ApplicationDbContext context, UserManager<Customer> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ConflictManagementDashboard
-        public IActionResult ConflictManagementDashboard()
+        public async Task<IActionResult> ConflictManagementDashboard()
         {
+            var userId = HttpContext.Session.GetString("UserID");
+            var user = await _userManager.FindByEmailAsync(userId);
+
+            // Retrieve all users with the "Operator" role
+            var operators = await _userManager.GetUsersInRoleAsync("Operator");
+
+            // Filter bookings to include only those with operators in the role or matching identifier
             var bookings = _context.Bookings
                 .Include(b => b.Customer)
                 .Include(b => b.Machine)
                 .Include(b => b.Operator)
                 .ToList(); // Get all bookings
 
-            ViewBag.Operators = _context.Operators.ToList();
+            ViewBag.Operators = operators.ToList();
             return View(bookings);
         }
+
 
         // POST: AssignOperator
         [HttpPost]
@@ -36,8 +47,8 @@ namespace LawnMowingService.Controllers
             var booking = await _context.Bookings.FindAsync(bookingId);
             if (booking != null)
             {
-                booking.OperatorId = operatorId; // Update OperatorId
-                booking.Status = "Assigned"; // Update the status to Assigned
+                booking.OperatorId = operatorId;
+                booking.Status = "Assigned";
                 await _context.SaveChangesAsync();
             }
 

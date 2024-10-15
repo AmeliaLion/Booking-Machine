@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LawnMowingService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241014122454_AdjustUserSchema")]
+    [Migration("20241015121451_AdjustUserSchema")]
     partial class AdjustUserSchema
     {
         /// <inheritdoc />
@@ -34,7 +34,6 @@ namespace LawnMowingService.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("Date")
@@ -313,8 +312,7 @@ namespace LawnMowingService.Migrations
                     b.HasOne("LawnMowingService.Models.Customer", "Customer")
                         .WithMany("Bookings")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("LawnMowingService.Models.Machine", "Machine")
                         .WithMany("Bookings")
